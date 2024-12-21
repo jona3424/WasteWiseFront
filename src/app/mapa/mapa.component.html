@@ -27,8 +27,10 @@
 
         <map-marker *ngIf="routeStartPoint" [position]="routeStartPoint" [icon]="'https://i.imgur.com/VWiqR4m.png'"></map-marker>
         <map-marker *ngIf="routeEndPoint" [position]="routeEndPoint" [icon]="'https://i.imgur.com/0oeWVJo.png'"></map-marker>
+        <map-marker *ngIf="routeTLPoint && !boundsReady" [position]="routeTLPoint" [icon]="'https://i.imgur.com/8442BfF.png'"></map-marker>
+        
 
-
+<!-- TODO: Promeniti ovu ikonicu!!! -->
         <map-marker *ngIf="lastClicked" [position]="lastClicked" (mapClick)="openConfirmationWindow(confirmation)" [icon]="'https://i.imgur.com/KvrHWiR.png'"
         #confirmation="mapMarker">
           <map-info-window> 
@@ -36,5 +38,7 @@
           </map-info-window>
         </map-marker>
 
+
+      <map-rectangle *ngIf="boundsReady" [bounds]="bounds" />
     </google-map>
   </div>

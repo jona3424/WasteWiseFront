@@ -199,9 +199,10 @@ private map: google.maps.Map | undefined;
       lastClicked : any;
       routeStartPoint : any;
       routeEndPoint : any;
+      routeTLPoint : any;
 
 
-      headings : string[] = ["Potvrdi pocetnu tacku", "Potvrdi krajnju tacku"];
+      headings : string[] = ["Potvrdi pocetnu tacku", "Potvrdi krajnju tacku", "Potvrdi gornji lijevi cosak", "Potvrdi donji desni cosak"];
       current_step_index : number = 0
 
       doNextRouteStep(event : any){
@@ -218,14 +219,31 @@ private map: google.maps.Map | undefined;
         if(result){
             if(!this.routeStartPoint) { this.routeStartPoint = this.lastClicked; }
             else if(!this.routeEndPoint) { this.routeEndPoint = this.lastClicked;  }
+            else if(!this.routeTLPoint){
+                this.routeTLPoint = this.lastClicked
+                this.bounds.north = this.lastClicked.lat()
+                this.bounds.west = this.lastClicked.lng()
+            }else{
+                this.bounds.south = this.lastClicked.lat()
+                this.bounds.east = this.lastClicked.lng()
+                this.boundsReady = true
+            }
+            this.current_step_index++;
         }
         this.lastClicked = null;
       }
 
+      boundsReady = false;
+    bounds = {
+        north: 51.069581,
+        south: 51.017964,
+        east:  13.748602,
+        west: 13.687615
+    }; 
       openConfirmationWindow(confirmationMarker) {
             const marker = this.infoWindowsView.get(this.infoWindowsView.length-1);
             marker.open(confirmationMarker)
-            console.log()
+           
       }
 
 }
