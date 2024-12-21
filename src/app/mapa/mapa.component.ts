@@ -119,9 +119,7 @@ private map: google.maps.Map | undefined;
 
  }
  @ViewChildren(MapInfoWindow) infoWindowsView !: QueryList<MapInfoWindow>;
-
  openInfoWindow(marker: MapMarker, windowIndex: number) {
-    
     if(windowIndex == this.open){
 
         this.infoWindowsView.get(this.open)?.close();
@@ -198,5 +196,36 @@ private map: google.maps.Map | undefined;
           });
       }
       
+      lastClicked : any;
+      routeStartPoint : any;
+      routeEndPoint : any;
+
+
+      headings : string[] = ["Potvrdi pocetnu tacku", "Potvrdi krajnju tacku"];
+      current_step_index : number = 0
+
+      doNextRouteStep(event : any){
+        //TODO: Ako covek nije smecar return;
+        const lat = event.latLng.lat()
+        const lon = event.latLng.lng()
+
+        this.lastClicked = new google.maps.LatLng(lat,lon);
+
+        console.log(lat+","+lon);
+      }
+
+      onResponse(result : any){
+        if(result){
+            if(!this.routeStartPoint) { this.routeStartPoint = this.lastClicked; }
+            else if(!this.routeEndPoint) { this.routeEndPoint = this.lastClicked;  }
+        }
+        this.lastClicked = null;
+      }
+
+      openConfirmationWindow(confirmationMarker) {
+            const marker = this.infoWindowsView.get(this.infoWindowsView.length-1);
+            marker.open(confirmationMarker)
+            console.log()
+      }
 
 }

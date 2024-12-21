@@ -20,12 +20,14 @@ import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
 import { AdminComponent } from './admin/admin.component';
 import { SignupComponent } from './signup/signup.component';
+import { ConfirmComponent } from './confirm/confirm.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MapaComponent,
     BubbleComponent,
+    ConfirmComponent,
   ],
   imports: [
     LoginComponent,
