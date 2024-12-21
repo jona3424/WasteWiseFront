@@ -39,6 +39,9 @@
         </map-marker>
 
 
+        <!-- TODO: Promeniti boju ovog pravougaonika i ove rute -->
       <map-rectangle *ngIf="boundsReady" [bounds]="bounds" />
+      <map-polyline *ngIf="routeReady" [path]="path"/>
+      
     </google-map>
   </div>

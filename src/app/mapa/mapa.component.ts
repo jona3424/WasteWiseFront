@@ -1,7 +1,7 @@
 
 import { Component, ViewEncapsulation, QueryList, ViewChildren, ViewChild, ElementRef, NgZone } from '@angular/core';
 
-import {GoogleMap, MapInfoWindow, MapMarker} from '@angular/google-maps'
+import {GoogleMap, MapInfoWindow, MapMarker, MapPolyline} from '@angular/google-maps'
 import { DatabaseService } from '../services/database.service';
 import { Container } from '../models/container';
 import { LocationService } from '../services/location.service';
@@ -159,7 +159,7 @@ private map: google.maps.Map | undefined;
 
             const longitude = position.coords.longitude;
             const latitude = position.coords.latitude;
-            // alert("Ura "+latitude+","+longitude)
+            // console.log("Ura "+latitude+","+longitude)
             MapaComponent.position = { lat : latitude, lon : longitude};
             const pos = new google.maps.LatLng(latitude, longitude);
             if(!this.startPos && this.googleMap) this.googleMap.panTo(pos);
@@ -189,7 +189,7 @@ private map: google.maps.Map | undefined;
               } else if (place.geometry?.location) {
                 // If no viewport, just set the center and zoom in
                 this.googleMap.panTo(place.geometry.location);
-                this.googleMap.zoom = 15; // You can adjust the zoom level
+                this.googleMap.zoom = 15; // You can adjust the zoom level 
 
               }
             });
@@ -208,7 +208,7 @@ private map: google.maps.Map | undefined;
       doNextRouteStep(event : any){
         //TODO: Razmisliti o logici za reset rute
         if(this.current_step_index == 4) return;
-        
+
         //TODO: Ako covek nije smecar return;
         const lat = event.latLng.lat()
         const lon = event.latLng.lng()
@@ -254,6 +254,11 @@ private map: google.maps.Map | undefined;
       }
 
       toSendContainers = [];
+
+
+      path: google.maps.LatLngLiteral[] = [];
+      routeReady = false;
+
       filterContainers(){
         this.toSendContainers = []
         this.containers.forEach(element => {
@@ -272,6 +277,14 @@ private map: google.maps.Map | undefined;
         
         //TODO: Posalji kontejnere na bek
 
+        //TODO: Odgovor od beka sacuvaj -- Za sad mokovano
+        this.path =  [
+            {lat: 51.049363079797935, lng: 13.681645098624697},
+            {lat: 51.047231708933374, lng: 13.680261078773013},
+            {lat: 51.047061717826146, lng: 13.68096704211112},
+          ];
+
+          this.routeReady = true;
       }
 
 }
