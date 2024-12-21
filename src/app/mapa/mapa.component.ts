@@ -206,6 +206,9 @@ private map: google.maps.Map | undefined;
       current_step_index : number = 0
 
       doNextRouteStep(event : any){
+        //TODO: Razmisliti o logici za reset rute
+        if(this.current_step_index == 4) return;
+        
         //TODO: Ako covek nije smecar return;
         const lat = event.latLng.lat()
         const lon = event.latLng.lng()
@@ -227,13 +230,17 @@ private map: google.maps.Map | undefined;
                 this.bounds.south = this.lastClicked.lat()
                 this.bounds.east = this.lastClicked.lng()
                 this.boundsReady = true
+
+                //Posto ce ovo odmah da posalje zahtev u bazu...
+                //TODO: Razmisliti da li ovo treba odmah da se zovne kad se iscrta pravougaonik ili da ima neko dugme start
+                this.filterContainers();
             }
             this.current_step_index++;
         }
         this.lastClicked = null;
       }
 
-      boundsReady = false;
+    boundsReady = false;
     bounds = {
         north: 51.069581,
         south: 51.017964,
@@ -244,6 +251,27 @@ private map: google.maps.Map | undefined;
             const marker = this.infoWindowsView.get(this.infoWindowsView.length-1);
             marker.open(confirmationMarker)
            
+      }
+
+      toSendContainers = [];
+      filterContainers(){
+        this.toSendContainers = []
+        this.containers.forEach(element => {
+            const lat = element.location.lat()
+            const lon = element.location.lng()
+
+            if( this.bounds.south <= lat && lat <= this.bounds.north &&
+                this.bounds.west <= lon && lon <= this.bounds.east
+            )
+            this.toSendContainers.push({
+                id : element.id,
+                x: lat,
+                y: lon
+            })
+        });
+        
+        //TODO: Posalji kontejnere na bek
+
       }
 
 }
