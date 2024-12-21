@@ -1430,7 +1430,8 @@
     }
     .container,
     body {
-      min-width:992px!important
+      min-width:992px!important;
+      margin-bottom: 0px;
     }
     .navbar {
       display:none
@@ -2611,7 +2612,10 @@
     margin:0;
     text-align:left;
     color:#525f7f;
-    background-color:#f8f9fe
+    background-color:#f8f9fe;
+    margin: 0px !important;
+    padding: 0px;
+    height: 100%;
   }
   [tabindex='-1']:focus {
     outline:0!important

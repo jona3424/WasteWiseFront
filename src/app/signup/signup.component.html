@@ -1,0 +1,67 @@
+<div class="full-container">
+    <!-- Your content here -->
+    <div class="row" class="background-container">
+        <div class="col-3" style="background-color: antiquewhite; opacity: 80%; display: flex; justify-content: center; align-items: center; height: 100vh; ">
+            <table style="transform: scale(1.2);">
+                <tr>
+                    <td>
+                        <p class="text-center">{{errorMsg}}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <br> <p class="text-center">Username: </p>
+                    </td>
+                </tr>   
+                <tr>
+                    <td>
+                        <input type="text" [(ngModel)]="username" placeholder="Enter username" required="yes" class="input-group-text" style="width: 100%;">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <br> <p class="text-center">Password: </p>
+                    </td>
+                </tr>   
+                <tr>
+                    <td>
+                        <input type="password" [(ngModel)]="password1" placeholder="Enter password" required="yes" class="input-group-text" style="width: 100%;">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <br> <p class="text-center">Reenter password: </p>
+                    </td>
+                </tr>   
+                <tr>
+                    <td>
+                        <input type="password" [(ngModel)]="password2" placeholder="Reenter password" required="yes" class="input-group-text" style="width: 100%;">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <br> <p class="text-center">E-mail: </p>
+                    </td>
+                </tr>   
+                <tr>
+                    <td>
+                        <input type="email" [(ngModel)]="email" placeholder="Enter email" required="yes" class="input-group-text" style="width: 100%;">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center">
+                        <br> <button (click)="signup()" class="btn btn-success text-center">Login</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center">
+                        <br>  Already have an account? Sign in <a href="/login"> here!</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-9">
+
+        </div>
+    </div>
+</div>

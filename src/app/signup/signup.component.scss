@@ -1,0 +1,17 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%; /* Ensures the body spans the full viewport height */
+}
+
+.background-container {
+    width: 100vw; /* Full width of the viewport */
+    height: 100vh;
+    background-image: url('../../assets/images/reciklaza.jpg'); /* Set the image */
+    background-size: cover; /* Scale the image to cover the div */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    
+}

@@ -15,6 +15,11 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
 import paginatorTranslations from "../paginator_translations";
 import { MatButtonModule } from "@angular/material/button";
+import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './login/login.component';
+import { UserComponent } from './user/user.component';
+import { AdminComponent } from './admin/admin.component';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +28,7 @@ import { MatButtonModule } from "@angular/material/button";
     BubbleComponent,
   ],
   imports: [
+    LoginComponent,
     BrowserModule,
     GoogleMapsModule,
     AppRoutingModule,
@@ -32,9 +38,14 @@ import { MatButtonModule } from "@angular/material/button";
     MatNativeDateModule,
     MatFormFieldModule,
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule,
     MatPaginatorModule,
-    MatButtonModule
+    MatButtonModule,
+    LoginComponent,
+    SignupComponent,
+    UserComponent,
+    AdminComponent
   ],
   providers: [
     { 

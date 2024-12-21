@@ -5,6 +5,7 @@ import {GoogleMap, MapInfoWindow, MapMarker} from '@angular/google-maps'
 import { DatabaseService } from '../services/database.service';
 import { Container } from '../models/container';
 import { LocationService } from '../services/location.service';
+import { MapService } from '../map.service';
 
 @Component({
   selector: 'app-mapa',
@@ -140,6 +141,7 @@ private map: google.maps.Map | undefined;
 
  constructor(
     private readonly db: DatabaseService,
+    private mapService: MapService,
     private ngZone: NgZone,
     private locationService: LocationService
   ) {
@@ -148,7 +150,6 @@ private map: google.maps.Map | undefined;
   ngOnInit(): void {
     this.containers = this.db.getContainers();  
     this.locationService.getLocation().subscribe(position => {
-
         const longitude = position.coords.longitude;
         const latitude = position.coords.latitude;
         alert("Ura "+latitude+","+longitude)
@@ -156,6 +157,14 @@ private map: google.maps.Map | undefined;
         const pos = new google.maps.LatLng(latitude, longitude);
         if(!this.startPos && this.googleMap) this.googleMap.panTo(pos);
         this.startPos = pos
+        this.mapService.getContainers().subscribe( data => {
+            data.forEach(c => {
+                //alert(c['containerId'] + " " +  c['locationLatitude'] + "," + c['locationLongitude']);
+                this.containers.push(new Container(c['containerId'], c['locationLatitude'], c['locationLongitude']));
+                
+                // this.containers.push(new Container(c.id, c.location.lat, c.location.lng)) 
+            });
+        })
     })
     this.initAutocomplete();
   }
