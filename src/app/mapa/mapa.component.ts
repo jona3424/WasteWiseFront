@@ -164,6 +164,24 @@ private map: google.maps.Map | undefined;
             const pos = new google.maps.LatLng(latitude, longitude);
             if(!this.startPos && this.googleMap) this.googleMap.panTo(pos);
             this.startPos = pos
+
+            if(this.routeReady && this.toSendContainers.length != 0){
+                this.toSendContainers = this.toSendContainers.filter(container => { 
+                    const lat = container.x
+                    const lon = container.y
+
+                    //Ovo racuna manje vise distancu u metrima
+                    const deglen = 110.25
+                    const x = lat - latitude
+                    const y = (lon - longitude)*Math.cos(latitude)
+                    const dist = deglen*Math.sqrt(x*x + y*y) * 1000
+
+                    //TODO: Dogovoriti se kad je covek dovoljno blizu kontejneru
+
+                    //TODO: Obojati kontejner zelenim
+                    return dist < 50 // 50 metara
+                });
+            }
         })
     this.initAutocomplete();
   }
