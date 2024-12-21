@@ -1,0 +1,54 @@
+.my-google-map {
+    position: relative;
+    .map-container{
+        
+        height: 100vh;
+        width: 100vw;
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          
+      }
+   
+  }
+
+  .map-controls {
+    position: absolute;
+    top: 10px; /* Adjust as needed */
+    left: 10px; /* Adjust as needed */
+    display: flex;
+    align-items: flex-start;
+    gap: 10px; /* Space between logo and search bar */
+    z-index: 1000; /* Ensure it's above the map */
+  }
+  
+  .logo-overlay {
+    opacity: 0.6;
+    /* Remove position, top, left, and z-index from here */
+    
+    .logo {
+      width: 100px;
+      height: auto;
+    }
+  }
+  
+  .search-container {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    /* Remove position, top, left, and z-index from here */
+  
+    input#google-map-search {
+      width: 60vw;
+      max-width: 400px;
+      margin: 20px;
+      margin-left: 0;
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 20px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+  }

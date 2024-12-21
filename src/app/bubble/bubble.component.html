@@ -1,0 +1,23 @@
+ <div class="card">
+    <h3 class="heading">Odje moze da ide neki naziv</h3> 
+
+
+    <div class="image-upload">
+        <label for="file-input">
+          <img src="https://media.istockphoto.com/id/1175387759/vector/camera-icon.jpg?s=612x612&w=0&k=20&c=paC1ZkU31dH2B5epXqT_cYOyca5uqh4v0WpFUldCUBE=" width="50px"/>
+        </label>
+      
+        <input id="file-input" type="file" accept="image/*" capture="environment" (change)="imageUploaded($event, container.id)"/>
+      </div>
+
+    <!-- <div class="my-3">
+        <span *ngFor="let prop of prop_kriticno">
+            <h6 class="mb-0">{{prop.field}}</h6> <span [style.color]="prop.critical">{{prop.text}}</span> <br>
+        </span>
+        <span *ngFor="let prop of prop_prihvatljivo">
+            <h6 class="mb-0">{{prop.field}}</h6> <span [style.color]="'rgb(210, 168, 0)'">{{prop.text}}</span> <br>
+        </span>
+        <span *ngIf="count_bad == 0 && count_maybe == 0 && count_all != 0;" style="color:green">Water quality is OK</span>
+    </div>
+    <a [routerLink]="'station/'+stanica.id" class="text1 text2">More details...</a> -->
+</div>

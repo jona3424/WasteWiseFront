@@ -1,0 +1,29 @@
+
+
+<div class="map-controls">
+  <div class="logo-overlay">
+    <img src="assets/images/logo.png" class="logo" alt="logo">
+  </div>
+  <div class="search-container">
+    <input type="text" id="google-map-search" #googleMapSearch placeholder="Search locations">
+  </div>
+</div>
+
+<div *ngIf="containers != null" class="my-google-map">
+    <google-map id="google-map" [width]="null" [height]="null" [options]="mapOptions">
+        <map-marker *ngIf="startPos" [position]="startPos" [icon]="'https://i.imgur.com/KvrHWiR.png'">
+
+        </map-marker>
+        <map-marker *ngFor="let container of containers; let i = index" #marker="mapMarker" [position]="container.location" 
+        [icon]="'https://i.imgur.com/7MYTrtg.png'"  
+        (mapClick)="openInfoWindow(marker, i) ">
+            <map-info-window> 
+
+                <app-bubble [container]="container"></app-bubble>
+
+            </map-info-window>
+
+        </map-marker>
+
+    </google-map>
+  </div>
