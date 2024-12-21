@@ -179,7 +179,7 @@ private map: google.maps.Map | undefined;
                     //TODO: Dogovoriti se kad je covek dovoljno blizu kontejneru
 
                     //TODO: Obojati kontejner zelenim
-                    return dist < 50 // 50 metara
+                    return dist > 50 // 50 metara
                 });
             }
         })
