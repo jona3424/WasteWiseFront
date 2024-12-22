@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AdminComponent } from './admin.component';
+import { MapaAdminComponent } from './mapa-admin.component';
 
-describe('AdminComponent', () => {
-  let component: AdminComponent;
-  let fixture: ComponentFixture<AdminComponent>;
+describe('MapaAdminComponent', () => {
+  let component: MapaAdminComponent;
+  let fixture: ComponentFixture<MapaAdminComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AdminComponent]
+      declarations: [MapaAdminComponent]
     });
-    fixture = TestBed.createComponent(AdminComponent);
+    fixture = TestBed.createComponent(MapaAdminComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

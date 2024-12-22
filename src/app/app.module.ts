@@ -17,15 +17,15 @@ import paginatorTranslations from "../paginator_translations";
 import { MatButtonModule } from "@angular/material/button";
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
-import { UserComponent } from './user/user.component';
-import { AdminComponent } from './admin/admin.component';
 import { SignupComponent } from './signup/signup.component';
+import { MapaAdminComponent } from './mapa-admin/mapa-admin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MapaComponent,
     BubbleComponent,
+    MapaAdminComponent,
   ],
   imports: [
     LoginComponent,
@@ -44,8 +44,7 @@ import { SignupComponent } from './signup/signup.component';
     MatButtonModule,
     LoginComponent,
     SignupComponent,
-    UserComponent,
-    AdminComponent
+
   ],
   providers: [
     { 

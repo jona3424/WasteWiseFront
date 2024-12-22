@@ -17,7 +17,7 @@ export class LoginService {
       .set('username', username)
       .set('password', password);
 
-    return this.http.post<User>(this.ENDPOINT_URL + "/login", null, { params });
+    return this.http.post<User>(this.ENDPOINT_URL + "/auth/login", null, { params });
   }
 
   signup(username: string, password: string, email: string, role: string){
