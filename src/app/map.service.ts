@@ -9,8 +9,11 @@ export class MapService {
 
   constructor(private http: HttpClient) { }
   
+  ENDPOINT_URL:string = 'http://localhost:8080';
+  //ENDPOINT_URL:string = 'https://fast-square-tortoise.ngrok-free.app';
+  
 
   getContainers() {
-    return this.http.get<Container[]>("http://localhost:8080/container/getAllContainers");
+    return this.http.post<Container[]>(this.ENDPOINT_URL + "/container/getAllContainers", null);
   }
 }

@@ -1,7 +1,9 @@
 export class Container {
     id : string;
     location : google.maps.LatLng
-
+    icon: string;
+    cause: string;
+    timestamp: string;
     // containerId: number;
     // locationLatitude: number;
     // locationLongitude: number;
@@ -10,8 +12,16 @@ export class Container {
     // status: string;
     // lastCollectedAt: string;
 
-    public constructor(id: string, lat : number, lon : number){
+    public constructor(id: string, lat : number, lon : number, full: boolean, cause: string, timestamp: string){
         this.id = id;
         this.location = new google.maps.LatLng(lat,lon)
+        if(full){
+            this.icon = "assets/images/wastered.png"
+        }
+        else {
+            this.icon = "assets/images/wastegreen.png"
+        }
+        this.cause = cause;
+        this.timestamp = timestamp;
     }
 }

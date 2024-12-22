@@ -10,14 +10,15 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  URL: string = '' 
+  ENDPOINT_URL:string = 'http://localhost:8080';
+  //ENDPOINT_URL:string = 'https://fast-square-tortoise.ngrok-free.app';
 
   getUser(username: string, password: string){
     const params = new HttpParams()
       .set('username', username)
       .set('password', password);
 
-    return this.http.post<User>('http://localhost:8080/auth' + "/login", null, { params });
+    return this.http.post<User>(this.ENDPOINT_URL + "/login", null, { params });
   }
 
   signup(username: string, password: string, email: string, role: string){
@@ -31,7 +32,7 @@ export class LoginService {
     user.password=password;
     user.email = email;
     user.role = role;
-    return this.http.post<User>("http://localhost:8080/auth/register", user);
+    return this.http.post<User>(this.ENDPOINT_URL + "/auth/register", user);
   }
 
 }

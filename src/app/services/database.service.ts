@@ -7,8 +7,8 @@ import { Container } from '../models/container';
 export class DatabaseService {
 	constructor() { }
 
-	getContainers() : Container[]{
-		return [new Container("nigger", 44.791837,20.476937)];
-	}
+	// getContainers() : Container[]{
+	// 	//return [new Container("nigger", 44.791837,20.476937)];
+	// }
 
 }

@@ -11,11 +11,11 @@
 
 <div *ngIf="containers != null" class="my-google-map">
     <google-map id="google-map" [width]="null" [height]="null" [options]="mapOptions">
-        <map-marker *ngIf="startPos" [position]="startPos" [icon]="'https://i.imgur.com/KvrHWiR.png'">
+        <map-marker *ngIf="startPos" [position]="startPos" [icon]="'assets/images/location.png'">
 
         </map-marker>
         <map-marker *ngFor="let container of containers; let i = index" #marker="mapMarker" [position]="container.location" 
-        [icon]="'https://i.imgur.com/7MYTrtg.png'"  
+        [icon]="container.icon"  
         (mapClick)="openInfoWindow(marker, i) ">
             <map-info-window> 
 

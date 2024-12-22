@@ -148,23 +148,25 @@ private map: google.maps.Map | undefined;
   }
 
   ngOnInit(): void {
-    this.containers = this.db.getContainers();  
-    this.locationService.getLocation().subscribe(position => {
+    
+    this.mapService.getContainers().subscribe( data => {
+        this.containers = [];
+        data.forEach(c => {
+            //alert(c['containerId'] + " " +  c['locationLatitude'] + "," + c['locationLongitude']);
+            
+            this.containers.push(new Container(c['containerId'], c['locationLatitude'], c['locationLongitude'], c['full'], c['cause'], c['timestamp']));
+            
+            // this.containers.push(new Container(c.id, c.location.lat, c.location.lng)) 
+        });
+    })  
+    navigator.geolocation.watchPosition((position)=>{
         const longitude = position.coords.longitude;
         const latitude = position.coords.latitude;
-        alert("Ura "+latitude+","+longitude)
+        // alert("Ura "+latitude+","+longitude)
         MapaComponent.position = { lat : latitude, lon : longitude};
         const pos = new google.maps.LatLng(latitude, longitude);
         if(!this.startPos && this.googleMap) this.googleMap.panTo(pos);
-        this.startPos = pos
-        this.mapService.getContainers().subscribe( data => {
-            data.forEach(c => {
-                //alert(c['containerId'] + " " +  c['locationLatitude'] + "," + c['locationLongitude']);
-                this.containers.push(new Container(c['containerId'], c['locationLatitude'], c['locationLongitude']));
-                
-                // this.containers.push(new Container(c.id, c.location.lat, c.location.lng)) 
-            });
-        })
+        this.startPos = pos
     })
     this.initAutocomplete();
   }
