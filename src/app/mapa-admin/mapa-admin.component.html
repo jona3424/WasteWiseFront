@@ -12,7 +12,7 @@
 <div *ngIf="containers != null" class="my-google-map">
     <google-map (mapClick)="doNextRouteStep($event)" id="google-map" [width]="null" [height]="null" [options]="mapOptions">
       
-      <map-marker *ngIf="startPos" [position]="startPos" [icon]="'assets/images/location.png'">
+      <map-marker *ngIf="startPos" [position]="startPos" [icon]="'assets/images/garbage-truck.png'">
 
       </map-marker>
       <map-marker *ngFor="let container of containers; let i = index" #marker="mapMarker" [position]="container.location" 
@@ -27,8 +27,8 @@
       </map-marker>
 
 
-        <map-marker *ngIf="routeStartPoint" [position]="routeStartPoint" [icon]="'https://i.imgur.com/VWiqR4m.png'"></map-marker>
-        <map-marker *ngIf="routeEndPoint" [position]="routeEndPoint" [icon]="'https://i.imgur.com/0oeWVJo.png'"></map-marker>
+        <map-marker *ngIf="routeStartPoint" [position]="routeStartPoint" [icon]="'assets/images/placeholder.png'"></map-marker>
+        <map-marker *ngIf="routeEndPoint" [position]="routeEndPoint" [icon]="'assets/images/racing-flag.png'"></map-marker>
         <map-marker *ngIf="routeTLPoint && !boundsReady" [position]="routeTLPoint" [icon]="'https://i.imgur.com/8442BfF.png'"></map-marker>
         
 
@@ -42,7 +42,7 @@
 
 
         <!-- TODO: Promeniti boju ovog pravougaonika i ove rute -->
-      <map-rectangle *ngIf="boundsReady" [bounds]="bounds" />
+      <map-rectangle *ngIf="boundsReady" [bounds]="bounds"/>
       <map-polyline *ngIf="routeReady" [path]="path"/>
       
     </google-map>
