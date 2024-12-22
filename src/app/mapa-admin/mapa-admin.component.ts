@@ -274,6 +274,7 @@ private map: google.maps.Map | undefined;
       }
 
     boundsReady = false;
+    foundPath=false;
     bounds = {
         north: 51.069581,
         south: 51.017964,
@@ -317,13 +318,16 @@ private map: google.maps.Map | undefined;
         this.routeService.calculateRoute(this.toSendContainers).subscribe(
           (coords) => {
             this.path = coords;
+            this.routeReady = true;
+            this.boundsReady=false;
+            this.foundPath=true;
           },
           (error) => {
             console.error('Error calculating route:', error);
           }
         );
         
-          this.routeReady = true;
+
       }
 
 }
