@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MapaComponent } from './mapa/mapa.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
-import { MapaAdminComponent } from './mapa-admin/mapa-admin.component';
+import { MapaAdminComponent } from './mapa-admin/mapa-admin.component'; 
 
 const routes: Routes = [
   {path:'', component: LoginComponent},
