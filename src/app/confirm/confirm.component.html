@@ -1,0 +1,20 @@
+<div >
+    <h3 class="heading">{{heading}}</h3> 
+
+
+    <div style="display: flex; gap: 5px">
+        <button class="yes" (click)="accept()">DA</button>
+        <button (click)="decline()">NE</button>
+    </div>
+
+    <!-- <div class="my-3">
+        <span *ngFor="let prop of prop_kriticno">
+            <h6 class="mb-0">{{prop.field}}</h6> <span [style.color]="prop.critical">{{prop.text}}</span> <br>
+        </span>
+        <span *ngFor="let prop of prop_prihvatljivo">
+            <h6 class="mb-0">{{prop.field}}</h6> <span [style.color]="'rgb(210, 168, 0)'">{{prop.text}}</span> <br>
+        </span>
+        <span *ngIf="count_bad == 0 && count_maybe == 0 && count_all != 0;" style="color:green">Water quality is OK</span>
+    </div>
+    <a [routerLink]="'station/'+stanica.id" class="text1 text2">More details...</a> -->
+</div>

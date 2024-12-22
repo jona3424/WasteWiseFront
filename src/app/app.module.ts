@@ -19,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { MapaAdminComponent } from './mapa-admin/mapa-admin.component';
+import { ConfirmComponent } from './confirm/confirm.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { MapaAdminComponent } from './mapa-admin/mapa-admin.component';
     MapaComponent,
     BubbleComponent,
     MapaAdminComponent,
+    ConfirmComponent,
   ],
   imports: [
     LoginComponent,
@@ -44,7 +46,6 @@ import { MapaAdminComponent } from './mapa-admin/mapa-admin.component';
     MatButtonModule,
     LoginComponent,
     SignupComponent,
-
   ],
   providers: [
     { 
