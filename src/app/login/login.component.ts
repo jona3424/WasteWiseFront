@@ -27,7 +27,6 @@ export class LoginComponent {
 
     this.loginService.getUser(this.username, this.password).subscribe({
       next: (user) => {
-        alert(user);
         localStorage.setItem('user', JSON.stringify(user));
         if (user.role === 'USER') {
           this.router.navigate(['/user']);

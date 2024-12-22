@@ -164,7 +164,7 @@ private map: google.maps.Map | undefined;
       this.containers = [];
       data.forEach(c => {
           //alert(c['containerId'] + " " +  c['locationLatitude'] + "," + c['locationLongitude']);
-          
+          console.log(c['containerId'], c['locationLatitude'], c['locationLongitude'], c['full'], c['cause'], c['timestamp']);
           this.containers.push(new Container(c['containerId'], c['locationLatitude'], c['locationLongitude'], c['full'], c['cause'], c['timestamp']));
           
           // this.containers.push(new Container(c.id, c.location.lat, c.location.lng)) 
@@ -194,16 +194,17 @@ private map: google.maps.Map | undefined;
                     //TODO: Dogovoriti se kad je covek dovoljno blizu kontejneru
 
                     //TODO: Obojati kontejner zelenim
-                    return dist < 3 // 50 metara
+                    return dist < 60 // 50 metara
                 });
-                console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaa" +this.toSendContainers)
                 for(let i = 0; i < this.toSendContainers.length; i++){
                     if(this.toSendContainers[i].id == 0) continue;
                     this.mapService.updateCollected(this.toSendContainers[i].id).subscribe(
                         (data) => {
                           this.containers.forEach(element => {
                             if(element.id == data.containerId){
-                                element = new Container(data.containerId, data.locationLatitude, data.locationLongitude, data.full, data.cause, data.timestamp);
+                                this.containers = this.containers.filter(obj => obj !== element);
+                                this.containers.push(
+                                new Container(data.containerId, data.locationLatitude, data.locationLongitude, data.full, data.cause, data.timestamp));
                             }
                           });
                         },
@@ -212,7 +213,6 @@ private map: google.maps.Map | undefined;
                         }
                     );
                 }
-                console.log("kurcinaaaaaaaaaaaaaaaa" +this.containers)
 
             }
         })

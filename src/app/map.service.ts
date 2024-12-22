@@ -9,8 +9,8 @@ export class MapService {
 
   constructor(private http: HttpClient) { }
   
-  // ENDPOINT_URL:string = 'http://localhost:8080';
-  ENDPOINT_URL:string = 'https://fast-square-tortoise.ngrok-free.app';
+  ENDPOINT_URL:string = 'http://localhost:8080';
+  // ENDPOINT_URL:string = 'https://fast-square-tortoise.ngrok-free.app';
   
 
   getContainers() {
@@ -18,6 +18,8 @@ export class MapService {
   }
 
   updateCollected(containerId: number) {
-    return this.http.post<any>(this.ENDPOINT_URL + "/container/updateCollected", containerId);
+    const a=this.http.post<any>(this.ENDPOINT_URL + "/container/updateCollected?containerId="+containerId,null);
+    console.log(a);
+    return a;
   }
 }
