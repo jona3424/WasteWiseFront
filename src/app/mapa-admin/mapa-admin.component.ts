@@ -6,6 +6,19 @@ import { DatabaseService } from '../services/database.service';
 import { Container } from '../models/container';
 import { LocationService } from '../services/location.service';
 import { MapService } from '../map.service';
+import { RoutfinderService } from '../services/routfinder.service';
+
+interface Location {
+  id: number;
+  lat: number;
+  lng: number;
+}
+
+interface Coordinate {
+  lat: number;
+  lng: number;
+}
+
 
 @Component({
   selector: 'app-mapa-admin',
@@ -141,7 +154,8 @@ private map: google.maps.Map | undefined;
     private readonly db: DatabaseService,
     private mapService: MapService,
     private ngZone: NgZone,
-    private locationService: LocationService
+    private locationService: LocationService,
+    private routeService: RoutfinderService
   ) {
   }
 
@@ -168,8 +182,8 @@ private map: google.maps.Map | undefined;
 
             if(this.routeReady && this.toSendContainers.length != 0){
                 this.toSendContainers = this.toSendContainers.filter(container => { 
-                    const lat = container.x
-                    const lon = container.y
+                    const lat = container.lat
+                    const lon = container.lng
 
                     //Ovo racuna manje vise distancu u metrima
                     const deglen = 110.25
@@ -252,7 +266,7 @@ private map: google.maps.Map | undefined;
 
                 //Posto ce ovo odmah da posalje zahtev u bazu...
                 //TODO: Razmisliti da li ovo treba odmah da se zovne kad se iscrta pravougaonik ili da ima neko dugme start
-                this.filterContainers();
+                this.filterContainers(this.routeStartPoint);
             }
             this.current_step_index++;
         }
@@ -272,113 +286,43 @@ private map: google.maps.Map | undefined;
            
       }
 
-      toSendContainers = [];
+      toSendContainers :Location[] = [];
 
 
       path: google.maps.LatLngLiteral[] = [];
       routeReady = false;
 
-      filterContainers(){
+      filterContainers(startPoint:any){
         this.toSendContainers = []
+        this.toSendContainers.push({
+          id : 0,
+          lat: startPoint.lat(),
+          lng: startPoint.lng()
+      })
         this.containers.forEach(element => {
             const lat = element.location.lat()
             const lon = element.location.lng()
 
             if( this.bounds.south <= lat && lat <= this.bounds.north &&
                 this.bounds.west <= lon && lon <= this.bounds.east
+                && element.full
             )
             this.toSendContainers.push({
-                id : element.id,
-                x: lat,
-                y: lon
+                id : parseInt(element.id),
+                lat: lat,
+                lng: lon
             })
         });
         
-        //TODO: Posalji kontejnere na bek
-
-        //TODO: Odgovor od beka sacuvaj -- Za sad mokovano
-        this.path = [
-            {
-              lat: 44.79255,
-              lng: 20.47253
-            },
-            {
-              lat: 44.79198,
-              lng: 20.47042
-            },
-            {
-              lat: 44.79175,
-              lng: 20.46976
-            },
-            {
-              lat: 44.79156,
-              lng: 20.46922
-            },
-            {
-              lat: 44.79154,
-              lng: 20.46906
-            },
-            {
-              lat: 44.79172,
-              lng: 20.46906
-            },
-            {
-              lat: 44.79193,
-              lng: 20.46902
-            },
-            {
-              lat: 44.7923,
-              lng: 20.46885
-            },
-            {
-              lat: 44.79255,
-              lng: 20.46873
-            },
-            {
-              lat: 44.79281,
-              lng: 20.46885
-            },
-            {
-              lat: 44.79325,
-              lng: 20.469
-            },
-            {
-              lat: 44.79324,
-              lng: 20.46908
-            },
-              {
-              lat: 44.7929,
-              lng: 20.47112
-            },
-            {
-              lat: 44.79275,
-              lng: 20.47057
-            },
-              {
-              lat: 44.7923,
-              lng: 20.46885
-            },
-              {
-              lat: 44.79249,
-              lng: 20.46875
-            },
-             {
-              lat: 44.79255,
-              lng: 20.46873
-            },
-              {
-               lat: 44.79279,
-               lng: 20.46844
-              },
-            {
-              lat: 44.79331,
-              lng: 20.46778
-            },
-            {
-              lat: 44.79346,
-              lng: 20.46764
-            }
-          ];
+        this.routeService.calculateRoute(this.toSendContainers).subscribe(
+          (coords) => {
+            this.path = coords;
+          },
+          (error) => {
+            console.error('Error calculating route:', error);
+          }
+        );
+        
           this.routeReady = true;
       }
 

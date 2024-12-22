@@ -4,6 +4,7 @@ export class Container {
     icon: string;
     cause: string;
     timestamp: string;
+    full: boolean;
     // containerId: number;
     // locationLatitude: number;
     // locationLongitude: number;
@@ -14,6 +15,7 @@ export class Container {
 
     public constructor(id: string, lat : number, lon : number, full: boolean, cause: string, timestamp: string){
         this.id = id;
+        this.full=full;
         this.location = new google.maps.LatLng(lat,lon)
         if(full){
             this.icon = "assets/images/wastered.png"
