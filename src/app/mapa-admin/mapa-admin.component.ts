@@ -155,7 +155,7 @@ private map: google.maps.Map | undefined;
     private mapService: MapService,
     private ngZone: NgZone,
     private locationService: LocationService,
-    private routeService: RoutfinderService
+    private routeService: RoutfinderService,
   ) {
   }
 
@@ -194,8 +194,26 @@ private map: google.maps.Map | undefined;
                     //TODO: Dogovoriti se kad je covek dovoljno blizu kontejneru
 
                     //TODO: Obojati kontejner zelenim
-                    return dist > 50 // 50 metara
+                    return dist < 3 // 50 metara
                 });
+                console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaa" +this.toSendContainers)
+                for(let i = 0; i < this.toSendContainers.length; i++){
+                    if(this.toSendContainers[i].id == 0) continue;
+                    this.mapService.updateCollected(this.toSendContainers[i].id).subscribe(
+                        (data) => {
+                          this.containers.forEach(element => {
+                            if(element.id == data.containerId){
+                                element = new Container(data.containerId, data.locationLatitude, data.locationLongitude, data.full, data.cause, data.timestamp);
+                            }
+                          });
+                        },
+                        (error) => {
+                            console.error('Error updating container:', error);
+                        }
+                    );
+                }
+                console.log("kurcinaaaaaaaaaaaaaaaa" +this.containers)
+
             }
         })
     this.initAutocomplete();

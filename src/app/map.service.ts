@@ -16,4 +16,8 @@ export class MapService {
   getContainers() {
     return this.http.post<Container[]>(this.ENDPOINT_URL + "/container/getAllContainers", null);
   }
+
+  updateCollected(containerId: number) {
+    return this.http.post<any>(this.ENDPOINT_URL + "/container/updateCollected", containerId);
+  }
 }

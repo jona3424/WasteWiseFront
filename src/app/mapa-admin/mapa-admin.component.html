@@ -29,7 +29,7 @@
 
         <map-marker *ngIf="routeStartPoint" [position]="routeStartPoint" [icon]="'assets/images/placeholder.png'"></map-marker>
         <map-marker *ngIf="routeEndPoint" [position]="routeEndPoint" [icon]="'assets/images/racing-flag.png'"></map-marker>
-        <map-marker *ngIf="routeTLPoint && !boundsReady" [position]="routeTLPoint" [icon]="'https://i.imgur.com/8442BfF.png'"></map-marker>
+        <map-marker *ngIf="routeTLPoint && !boundsReady && !foundPath" [position]="routeTLPoint" [icon]="'https://i.imgur.com/8442BfF.png'"></map-marker>
         
 
 <!-- TODO: Promeniti ovu ikonicu!!! -->
