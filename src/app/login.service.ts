@@ -9,8 +9,8 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  ENDPOINT_URL:string = 'http://localhost:8080';
-  //ENDPOINT_URL:string = 'https://fast-square-tortoise.ngrok-free.app';
+  // ENDPOINT_URL:string = 'http://localhost:8080';
+  ENDPOINT_URL:string = 'https://fast-square-tortoise.ngrok-free.app';
 
   getUser(username: string, password: string){
     const params = new HttpParams()
